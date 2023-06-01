@@ -1,0 +1,459 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app: grafana
+  name: 4goldensignals
+  namespace: sx-grafana
+spec:
+  json: '{   "annotations": {     "list": [       {         "builtIn": 1,         "datasource":
+    "-- Grafana --",         "enable": true,         "hide": true,         "iconColor":
+    "rgba(0, 211, 255, 1)",         "name": "Annotations & Alerts",         "type":
+    "dashboard"       }     ]   },   "editable": true,   "gnetId": null,   "graphTooltip":
+    0,   "id": 1,   "iteration": 1685539126499,   "links": [],   "panels": [     {       "collapsed":
+    false,       "datasource": null,       "gridPos": {         "h": 1,         "w":
+    24,         "x": 0,         "y": 0       },       "id": 20,       "panels": [],       "title":
+    "Saturation",       "type": "row"     },     {       "aliasColors": {},       "bars":
+    false,       "dashLength": 10,       "dashes": false,       "datasource": null,       "fieldConfig":
+    {         "defaults": {},         "overrides": []       },       "fill": 1,       "fillGradient":
+    0,       "gridPos": {         "h": 8,         "w": 11,         "x": 0,         "y":
+    1       },       "hiddenSeries": false,       "id": 22,       "legend": {         "avg":
+    false,         "current": false,         "max": false,         "min": false,         "show":
+    true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": false,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "sum(\n    node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"\",
+    namespace=~\"$namespace\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type)
+    namespace_workload_pod:kube_pod_owner:relabel{cluster=\"\", namespace=~\"$namespace\",
+    workload=~\"$workload\", workload_type=\"deployment\"}\n) by (workload,pod)\n",           "interval":
+    "2m",           "legendFormat": "",           "refId": "A"         }       ],       "thresholds":
+    [],       "timeFrom": null,       "timeRegions": [],       "timeShift": null,       "title":
+    "CPU usage Total per pod",       "tooltip": {         "shared": true,         "sort":
+    0,         "value_type": "individual"       },       "type": "graph",       "xaxis":
+    {         "buckets": null,         "mode": "time",         "name": null,         "show":
+    true,         "values": []       },       "yaxes": [         {           "format":
+    "short",           "label": null,           "logBase": 1,           "max": null,           "min":
+    null,           "show": true         },         {           "format": "short",           "label":
+    null,           "logBase": 1,           "max": null,           "min": null,           "show":
+    true         }       ],       "yaxis": {         "align": false,         "alignLevel":
+    null       }     },     {       "aliasColors": {},       "bars": false,       "dashLength":
+    10,       "dashes": false,       "datasource": null,       "description": "",       "fieldConfig":
+    {         "defaults": {},         "overrides": []       },       "fill": 1,       "fillGradient":
+    0,       "gridPos": {         "h": 8,         "w": 10,         "x": 11,         "y":
+    1       },       "hiddenSeries": false,       "id": 24,       "legend": {         "avg":
+    false,         "current": false,         "max": false,         "min": false,         "show":
+    true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": false,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "sum(\n    container_memory_working_set_bytes{job=\"kubelet\",
+    metrics_path=\"/metrics/cadvisor\", cluster=\"\", namespace=~\"$namespace\", container!=\"\",
+    image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"\",
+    namespace=~\"$namespace\", workload_type=\"deployment\", workload=~\"$workload\"}\n)
+    by (workload,pod)",           "interval": "",           "legendFormat": "",           "refId":
+    "A"         }       ],       "thresholds": [],       "timeFrom": null,       "timeRegions":
+    [],       "timeShift": null,       "title": "Memory usage Total per pod",       "tooltip":
+    {         "shared": true,         "sort": 0,         "value_type": "individual"       },       "type":
+    "graph",       "xaxis": {         "buckets": null,         "mode": "time",         "name":
+    null,         "show": true,         "values": []       },       "yaxes": [         {           "$$hashKey":
+    "object:107",           "format": "bytes",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         },         {           "$$hashKey":
+    "object:108",           "format": "none",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         }       ],       "yaxis":
+    {         "align": false,         "alignLevel": null       }     },     {       "aliasColors":
+    {},       "bars": false,       "dashLength": 10,       "dashes": false,       "datasource":
+    null,       "fieldConfig": {         "defaults": {},         "overrides": []       },       "fill":
+    1,       "fillGradient": 0,       "gridPos": {         "h": 7,         "w": 11,         "x":
+    0,         "y": 9       },       "hiddenSeries": false,       "id": 26,       "legend":
+    {         "avg": false,         "current": false,         "max": false,         "min":
+    false,         "show": true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": false,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "sum(irate(container_network_receive_bytes_total{job=\"kubelet\",
+    metrics_path=\"/metrics/cadvisor\", cluster=\"\", namespace=~\"$namespace\"}[5m])\n*
+    on (namespace,pod)\ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"\",
+    namespace=~\"$namespace\", workload_type=\"deployment\",workload=~\"$workload\"})
+    by (workload,pod)",           "interval": "2m",           "legendFormat": "",           "refId":
+    "A"         }       ],       "thresholds": [],       "timeFrom": null,       "timeRegions":
+    [],       "timeShift": null,       "title": "Network Receive bandwidth per pod",       "tooltip":
+    {         "shared": true,         "sort": 0,         "value_type": "individual"       },       "type":
+    "graph",       "xaxis": {         "buckets": null,         "mode": "time",         "name":
+    null,         "show": true,         "values": []       },       "yaxes": [         {           "$$hashKey":
+    "object:301",           "format": "binBps",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         },         {           "$$hashKey":
+    "object:302",           "format": "short",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         }       ],       "yaxis":
+    {         "align": false,         "alignLevel": null       }     },     {       "aliasColors":
+    {},       "bars": false,       "dashLength": 10,       "dashes": false,       "datasource":
+    null,       "fieldConfig": {         "defaults": {},         "overrides": []       },       "fill":
+    1,       "fillGradient": 0,       "gridPos": {         "h": 7,         "w": 10,         "x":
+    11,         "y": 9       },       "hiddenSeries": false,       "id": 27,       "legend":
+    {         "avg": false,         "current": false,         "max": false,         "min":
+    false,         "show": true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": false,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "sum(irate(container_network_transmit_bytes_total{job=\"kubelet\",
+    metrics_path=\"/metrics/cadvisor\", cluster=\"\", namespace=~\"$namespace\"}[5m])\n*
+    on (namespace,pod)\ngroup_left(workload,workload_type) namespace_workload_pod:kube_pod_owner:relabel{cluster=\"\",
+    namespace=~\"$namespace\", workload_type=\"deployment\",workload=~\"$workload\"})
+    by (workload,pod)",           "interval": "2m",           "legendFormat": "",           "refId":
+    "A"         }       ],       "thresholds": [],       "timeFrom": null,       "timeRegions":
+    [],       "timeShift": null,       "title": "Network Transmit bandwidth per pod",       "tooltip":
+    {         "shared": true,         "sort": 0,         "value_type": "individual"       },       "type":
+    "graph",       "xaxis": {         "buckets": null,         "mode": "time",         "name":
+    null,         "show": true,         "values": []       },       "yaxes": [         {           "$$hashKey":
+    "object:356",           "format": "binBps",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         },         {           "$$hashKey":
+    "object:357",           "format": "short",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         }       ],       "yaxis":
+    {         "align": false,         "alignLevel": null       }     },     {       "collapsed":
+    false,       "datasource": null,       "gridPos": {         "h": 1,         "w":
+    24,         "x": 0,         "y": 16       },       "id": 8,       "panels": [],       "title":
+    "Traffic",       "type": "row"     },     {       "aliasColors": {},       "bars":
+    false,       "dashLength": 10,       "dashes": false,       "datasource": null,       "fieldConfig":
+    {         "defaults": {},         "overrides": []       },       "fill": 1,       "fillGradient":
+    0,       "gridPos": {         "h": 11,         "w": 11,         "x": 0,         "y":
+    17       },       "hiddenSeries": false,       "id": 6,       "legend": {         "avg":
+    false,         "current": false,         "max": false,         "min": false,         "show":
+    true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": true,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "sum by (exported_service,code) (rate(haproxy_server_http_responses_total{exported_service=~\"$service\"}[$__interval]))",           "format":
+    "time_series",           "interval": "2m",           "legendFormat": "",           "refId":
+    "A"         }       ],       "thresholds": [],       "timeFrom": null,       "timeRegions":
+    [],       "timeShift": null,       "title": "Traffic - Anzahl Requests pro Sekunde",       "tooltip":
+    {         "shared": true,         "sort": 0,         "value_type": "individual"       },       "transformations":
+    [],       "type": "graph",       "xaxis": {         "buckets": null,         "mode":
+    "time",         "name": null,         "show": true,         "values": []       },       "yaxes":
+    [         {           "$$hashKey": "object:737",           "format": "reqps",           "label":
+    null,           "logBase": 1,           "max": null,           "min": null,           "show":
+    true         },         {           "$$hashKey": "object:738",           "format":
+    "short",           "label": null,           "logBase": 1,           "max": null,           "min":
+    null,           "show": true         }       ],       "yaxis": {         "align":
+    false,         "alignLevel": null       }     },     {       "aliasColors": {},       "bars":
+    false,       "dashLength": 10,       "dashes": false,       "datasource": null,       "fieldConfig":
+    {         "defaults": {},         "overrides": []       },       "fill": 1,       "fillGradient":
+    0,       "gridPos": {         "h": 11,         "w": 10,         "x": 11,         "y":
+    17       },       "hiddenSeries": false,       "id": 14,       "legend": {         "avg":
+    false,         "current": false,         "max": false,         "min": false,         "show":
+    true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": true,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "sum by (exported_service,code,exported_pod) (rate(haproxy_server_http_responses_total{exported_service=~\"$service\"}[$__interval]))",           "interval":
+    "2m",           "legendFormat": "",           "refId": "A"         }       ],       "thresholds":
+    [],       "timeFrom": null,       "timeRegions": [],       "timeShift": null,       "title":
+    "Traffic per Pod",       "tooltip": {         "shared": true,         "sort":
+    0,         "value_type": "individual"       },       "type": "graph",       "xaxis":
+    {         "buckets": null,         "mode": "time",         "name": null,         "show":
+    true,         "values": []       },       "yaxes": [         {           "$$hashKey":
+    "object:558",           "format": "reqps",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         },         {           "$$hashKey":
+    "object:559",           "format": "short",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         }       ],       "yaxis":
+    {         "align": false,         "alignLevel": null       }     },     {       "collapsed":
+    false,       "datasource": null,       "gridPos": {         "h": 1,         "w":
+    24,         "x": 0,         "y": 28       },       "id": 12,       "panels": [],       "title":
+    "Latency",       "type": "row"     },     {       "aliasColors": {},       "bars":
+    false,       "dashLength": 10,       "dashes": false,       "datasource": null,       "fieldConfig":
+    {         "defaults": {},         "overrides": []       },       "fill": 1,       "fillGradient":
+    0,       "gridPos": {         "h": 7,         "w": 11,         "x": 0,         "y":
+    29       },       "hiddenSeries": false,       "id": 2,       "legend": {         "avg":
+    false,         "current": false,         "max": false,         "min": false,         "show":
+    true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": false,       "steppedLine": false,       "targets": [         {           "exemplar":
+    false,           "expr": "avg by(exported_service, pod)(haproxy_server_http_average_response_latency_milliseconds{exported_namespace=~\"$namespace\",exported_service=~\"$service\"})",           "interval":
+    "",           "legendFormat": "",           "refId": "A"         }       ],       "thresholds":
+    [],       "timeFrom": null,       "timeRegions": [],       "timeShift": null,       "title":
+    "Latency per Router-Pod",       "tooltip": {         "shared": true,         "sort":
+    0,         "value_type": "individual"       },       "type": "graph",       "xaxis":
+    {         "buckets": null,         "mode": "time",         "name": null,         "show":
+    true,         "values": []       },       "yaxes": [         {           "$$hashKey":
+    "object:411",           "format": "ms",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         },         {           "$$hashKey":
+    "object:412",           "format": "short",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         }       ],       "yaxis":
+    {         "align": false,         "alignLevel": null       }     },     {       "aliasColors":
+    {},       "bars": false,       "dashLength": 10,       "dashes": false,       "datasource":
+    null,       "fieldConfig": {         "defaults": {},         "overrides": []       },       "fill":
+    1,       "fillGradient": 0,       "gridPos": {         "h": 7,         "w": 10,         "x":
+    11,         "y": 29       },       "hiddenSeries": false,       "id": 16,       "legend":
+    {         "avg": false,         "current": false,         "max": false,         "min":
+    false,         "show": true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": false,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "avg by(exported_service,exported_pod,pod)(haproxy_server_http_average_response_latency_milliseconds{exported_namespace=~\"$namespace\",exported_service=~\"$service\"})",           "interval":
+    "",           "legendFormat": "",           "refId": "A"         }       ],       "thresholds":
+    [],       "timeFrom": null,       "timeRegions": [],       "timeShift": null,       "title":
+    "Latency per Pod",       "tooltip": {         "shared": true,         "sort":
+    0,         "value_type": "individual"       },       "type": "graph",       "xaxis":
+    {         "buckets": null,         "mode": "time",         "name": null,         "show":
+    true,         "values": []       },       "yaxes": [         {           "$$hashKey":
+    "object:466",           "format": "ms",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         },         {           "$$hashKey":
+    "object:467",           "format": "short",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         }       ],       "yaxis":
+    {         "align": false,         "alignLevel": null       }     },     {       "collapsed":
+    false,       "datasource": null,       "gridPos": {         "h": 1,         "w":
+    24,         "x": 0,         "y": 36       },       "id": 10,       "panels": [],       "title":
+    "Error",       "type": "row"     },     {       "aliasColors": {},       "bars":
+    false,       "dashLength": 10,       "dashes": false,       "datasource": null,       "fieldConfig":
+    {         "defaults": {},         "overrides": []       },       "fill": 1,       "fillGradient":
+    0,       "gridPos": {         "h": 7,         "w": 11,         "x": 0,         "y":
+    37       },       "hiddenSeries": false,       "id": 4,       "legend": {         "avg":
+    false,         "current": false,         "max": false,         "min": false,         "show":
+    true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": false,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "(sum by (exported_service) (rate(haproxy_server_http_responses_total{exported_service=~\"$service\",code!=\"2xx\"}[$__interval]))
+    / sum  by (exported_service) (rate(haproxy_server_http_responses_total{exported_service=~\"$service\"}[$__interval])))",           "interval":
+    "2m",           "legendFormat": "",           "refId": "A"         }       ],       "thresholds":
+    [],       "timeFrom": null,       "timeRegions": [],       "timeShift": null,       "title":
+    "Error Rate [%]",       "tooltip": {         "shared": true,         "sort": 0,         "value_type":
+    "individual"       },       "type": "graph",       "xaxis": {         "buckets":
+    null,         "mode": "time",         "name": null,         "show": true,         "values":
+    []       },       "yaxes": [         {           "$$hashKey": "object:574",           "format":
+    "percentunit",           "label": null,           "logBase": 1,           "max":
+    null,           "min": null,           "show": true         },         {           "$$hashKey":
+    "object:575",           "format": "short",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         }       ],       "yaxis":
+    {         "align": false,         "alignLevel": null       }     },     {       "aliasColors":
+    {},       "bars": false,       "dashLength": 10,       "dashes": false,       "datasource":
+    null,       "fieldConfig": {         "defaults": {},         "overrides": []       },       "fill":
+    1,       "fillGradient": 0,       "gridPos": {         "h": 7,         "w": 10,         "x":
+    11,         "y": 37       },       "hiddenSeries": false,       "id": 18,       "legend":
+    {         "avg": false,         "current": false,         "max": false,         "min":
+    false,         "show": true,         "total": false,         "values": false       },       "lines":
+    true,       "linewidth": 1,       "nullPointMode": "null",       "options": {         "alertThreshold":
+    true       },       "percentage": false,       "pluginVersion": "7.5.17",       "pointradius":
+    2,       "points": false,       "renderer": "flot",       "seriesOverrides": [],       "spaceLength":
+    10,       "stack": false,       "steppedLine": false,       "targets": [         {           "exemplar":
+    true,           "expr": "(sum by (exported_service,exported_pod) (rate(haproxy_server_http_responses_total{exported_service=~\"$service\",code!=\"2xx\"}[$__interval]))
+    / sum  by (exported_service,exported_pod) (rate(haproxy_server_http_responses_total{exported_service=~\"$service\"}[$__interval])))",           "interval":
+    "2m",           "legendFormat": "",           "refId": "A"         }       ],       "thresholds":
+    [],       "timeFrom": null,       "timeRegions": [],       "timeShift": null,       "title":
+    "Error rate per Pod [%]",       "tooltip": {         "shared": true,         "sort":
+    0,         "value_type": "individual"       },       "type": "graph",       "xaxis":
+    {         "buckets": null,         "mode": "time",         "name": null,         "show":
+    true,         "values": []       },       "yaxes": [         {           "$$hashKey":
+    "object:682",           "format": "percentunit",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         },         {           "$$hashKey":
+    "object:683",           "format": "short",           "label": null,           "logBase":
+    1,           "max": null,           "min": null,           "show": true         }       ],       "yaxis":
+    {         "align": false,         "alignLevel": null       }     }   ],   "refresh":
+    "5s",   "schemaVersion": 27,   "style": "dark",   "tags": [     "4GoldenSignals"   ],   "templating":
+    {     "list": [       {         "allValue": null,         "current": {           "selected":
+    false,           "text": [             "suxess-it-dev"           ],           "value":
+    [             "suxess-it-dev"           ]         },         "datasource": null,         "definition":
+    "label_values(namespace)",         "description": "Choose namespace ",         "error":
+    null,         "hide": 0,         "includeAll": true,         "label": "Namespace",         "multi":
+    true,         "name": "namespace",         "options": [           {             "selected":
+    false,             "text": "All",             "value": "$__all"           },           {             "selected":
+    false,             "text": "cert-manager",             "value": "cert-manager"           },           {             "selected":
+    false,             "text": "default",             "value": "default"           },           {             "selected":
+    false,             "text": "keycloak",             "value": "keycloak"           },           {             "selected":
+    false,             "text": "kube-node-lease",             "value": "kube-node-lease"           },           {             "selected":
+    false,             "text": "kube-public",             "value": "kube-public"           },           {             "selected":
+    false,             "text": "kube-system",             "value": "kube-system"           },           {             "selected":
+    false,             "text": "node-observability-operator",             "value":
+    "node-observability-operator"           },           {             "selected":
+    false,             "text": "ocp-backup-etcd",             "value": "ocp-backup-etcd"           },           {             "selected":
+    false,             "text": "openshift",             "value": "openshift"           },           {             "selected":
+    false,             "text": "openshift-apiserver",             "value": "openshift-apiserver"           },           {             "selected":
+    false,             "text": "openshift-apiserver-operator",             "value":
+    "openshift-apiserver-operator"           },           {             "selected":
+    false,             "text": "openshift-authentication",             "value": "openshift-authentication"           },           {             "selected":
+    false,             "text": "openshift-authentication-operator",             "value":
+    "openshift-authentication-operator"           },           {             "selected":
+    false,             "text": "openshift-cert-manager",             "value": "openshift-cert-manager"           },           {             "selected":
+    false,             "text": "openshift-cert-manager-operator",             "value":
+    "openshift-cert-manager-operator"           },           {             "selected":
+    false,             "text": "openshift-cloud-controller-manager",             "value":
+    "openshift-cloud-controller-manager"           },           {             "selected":
+    false,             "text": "openshift-cloud-controller-manager-operator",             "value":
+    "openshift-cloud-controller-manager-operator"           },           {             "selected":
+    false,             "text": "openshift-cloud-credential-operator",             "value":
+    "openshift-cloud-credential-operator"           },           {             "selected":
+    false,             "text": "openshift-cloud-network-config-controller",             "value":
+    "openshift-cloud-network-config-controller"           },           {             "selected":
+    false,             "text": "openshift-cluster-csi-drivers",             "value":
+    "openshift-cluster-csi-drivers"           },           {             "selected":
+    false,             "text": "openshift-cluster-machine-approver",             "value":
+    "openshift-cluster-machine-approver"           },           {             "selected":
+    false,             "text": "openshift-cluster-node-tuning-operator",             "value":
+    "openshift-cluster-node-tuning-operator"           },           {             "selected":
+    false,             "text": "openshift-cluster-samples-operator",             "value":
+    "openshift-cluster-samples-operator"           },           {             "selected":
+    false,             "text": "openshift-cluster-storage-operator",             "value":
+    "openshift-cluster-storage-operator"           },           {             "selected":
+    false,             "text": "openshift-cluster-version",             "value": "openshift-cluster-version"           },           {             "selected":
+    false,             "text": "openshift-config",             "value": "openshift-config"           },           {             "selected":
+    false,             "text": "openshift-config-managed",             "value": "openshift-config-managed"           },           {             "selected":
+    false,             "text": "openshift-config-operator",             "value": "openshift-config-operator"           },           {             "selected":
+    false,             "text": "openshift-console",             "value": "openshift-console"           },           {             "selected":
+    false,             "text": "openshift-console-operator",             "value":
+    "openshift-console-operator"           },           {             "selected":
+    false,             "text": "openshift-console-user-settings",             "value":
+    "openshift-console-user-settings"           },           {             "selected":
+    false,             "text": "openshift-controller-manager",             "value":
+    "openshift-controller-manager"           },           {             "selected":
+    false,             "text": "openshift-controller-manager-operator",             "value":
+    "openshift-controller-manager-operator"           },           {             "selected":
+    false,             "text": "openshift-debug-node-8b6xz",             "value":
+    "openshift-debug-node-8b6xz"           },           {             "selected":
+    false,             "text": "openshift-dns",             "value": "openshift-dns"           },           {             "selected":
+    false,             "text": "openshift-dns-operator",             "value": "openshift-dns-operator"           },           {             "selected":
+    false,             "text": "openshift-etcd",             "value": "openshift-etcd"           },           {             "selected":
+    false,             "text": "openshift-etcd-operator",             "value": "openshift-etcd-operator"           },           {             "selected":
+    false,             "text": "openshift-gitops",             "value": "openshift-gitops"           },           {             "selected":
+    false,             "text": "openshift-host-network",             "value": "openshift-host-network"           },           {             "selected":
+    false,             "text": "openshift-image-registry",             "value": "openshift-image-registry"           },           {             "selected":
+    false,             "text": "openshift-infra",             "value": "openshift-infra"           },           {             "selected":
+    false,             "text": "openshift-ingress",             "value": "openshift-ingress"           },           {             "selected":
+    false,             "text": "openshift-ingress-canary",             "value": "openshift-ingress-canary"           },           {             "selected":
+    false,             "text": "openshift-ingress-operator",             "value":
+    "openshift-ingress-operator"           },           {             "selected":
+    false,             "text": "openshift-insights",             "value": "openshift-insights"           },           {             "selected":
+    false,             "text": "openshift-kni-infra",             "value": "openshift-kni-infra"           },           {             "selected":
+    false,             "text": "openshift-kube-apiserver",             "value": "openshift-kube-apiserver"           },           {             "selected":
+    false,             "text": "openshift-kube-apiserver-operator",             "value":
+    "openshift-kube-apiserver-operator"           },           {             "selected":
+    false,             "text": "openshift-kube-controller-manager",             "value":
+    "openshift-kube-controller-manager"           },           {             "selected":
+    false,             "text": "openshift-kube-controller-manager-operator",             "value":
+    "openshift-kube-controller-manager-operator"           },           {             "selected":
+    false,             "text": "openshift-kube-scheduler",             "value": "openshift-kube-scheduler"           },           {             "selected":
+    false,             "text": "openshift-kube-scheduler-operator",             "value":
+    "openshift-kube-scheduler-operator"           },           {             "selected":
+    false,             "text": "openshift-kube-storage-version-migrator",             "value":
+    "openshift-kube-storage-version-migrator"           },           {             "selected":
+    false,             "text": "openshift-kube-storage-version-migrator-operator",             "value":
+    "openshift-kube-storage-version-migrator-operator"           },           {             "selected":
+    false,             "text": "openshift-logging",             "value": "openshift-logging"           },           {             "selected":
+    false,             "text": "openshift-machine-api",             "value": "openshift-machine-api"           },           {             "selected":
+    false,             "text": "openshift-machine-config-operator",             "value":
+    "openshift-machine-config-operator"           },           {             "selected":
+    false,             "text": "openshift-marketplace",             "value": "openshift-marketplace"           },           {             "selected":
+    false,             "text": "openshift-monitoring",             "value": "openshift-monitoring"           },           {             "selected":
+    false,             "text": "openshift-multus",             "value": "openshift-multus"           },           {             "selected":
+    false,             "text": "openshift-network-diagnostics",             "value":
+    "openshift-network-diagnostics"           },           {             "selected":
+    false,             "text": "openshift-network-operator",             "value":
+    "openshift-network-operator"           },           {             "selected":
+    false,             "text": "openshift-node",             "value": "openshift-node"           },           {             "selected":
+    false,             "text": "openshift-nutanix-infra",             "value": "openshift-nutanix-infra"           },           {             "selected":
+    false,             "text": "openshift-oauth-apiserver",             "value": "openshift-oauth-apiserver"           },           {             "selected":
+    false,             "text": "openshift-openstack-infra",             "value": "openshift-openstack-infra"           },           {             "selected":
+    false,             "text": "openshift-operator-lifecycle-manager",             "value":
+    "openshift-operator-lifecycle-manager"           },           {             "selected":
+    false,             "text": "openshift-operators",             "value": "openshift-operators"           },           {             "selected":
+    false,             "text": "openshift-operators-redhat",             "value":
+    "openshift-operators-redhat"           },           {             "selected":
+    false,             "text": "openshift-ovirt-infra",             "value": "openshift-ovirt-infra"           },           {             "selected":
+    false,             "text": "openshift-ovn-kubernetes",             "value": "openshift-ovn-kubernetes"           },           {             "selected":
+    false,             "text": "openshift-pipelines",             "value": "openshift-pipelines"           },           {             "selected":
+    false,             "text": "openshift-route-controller-manager",             "value":
+    "openshift-route-controller-manager"           },           {             "selected":
+    false,             "text": "openshift-service-ca",             "value": "openshift-service-ca"           },           {             "selected":
+    false,             "text": "openshift-service-ca-operator",             "value":
+    "openshift-service-ca-operator"           },           {             "selected":
+    false,             "text": "openshift-user-workload-monitoring",             "value":
+    "openshift-user-workload-monitoring"           },           {             "selected":
+    false,             "text": "openshift-vsphere-infra",             "value": "openshift-vsphere-infra"           },           {             "selected":
+    false,             "text": "sealed-secrets",             "value": "sealed-secrets"           },           {             "selected":
+    false,             "text": "service-nodeport",             "value": "service-nodeport"           },           {             "selected":
+    false,             "text": "suxess-it-admin",             "value": "suxess-it-admin"           },           {             "selected":
+    true,             "text": "suxess-it-dev",             "value": "suxess-it-dev"           },           {             "selected":
+    false,             "text": "suxess-it-prod",             "value": "suxess-it-prod"           },           {             "selected":
+    false,             "text": "suxess-it-qa",             "value": "suxess-it-qa"           },           {             "selected":
+    false,             "text": "sx-admin",             "value": "sx-admin"           },           {             "selected":
+    false,             "text": "sx-backstage",             "value": "sx-backstage"           },           {             "selected":
+    false,             "text": "sx-dev",             "value": "sx-dev"           },           {             "selected":
+    false,             "text": "sx-grafana",             "value": "sx-grafana"           },           {             "selected":
+    false,             "text": "sx-podtato",             "value": "sx-podtato"           },           {             "selected":
+    false,             "text": "test-limit",             "value": "test-limit"           }         ],         "query":
+    {           "query": "label_values(namespace)",           "refId": "StandardVariableQuery"         },         "refresh":
+    0,         "regex": "",         "skipUrlSync": false,         "sort": 0,         "tagValuesQuery":
+    "",         "tags": [],         "tagsQuery": "",         "type": "query",         "useTags":
+    false       },       {         "allValue": null,         "current": {           "selected":
+    false,           "text": [             "sx-monitor-demo-app"           ],           "value":
+    [             "sx-monitor-demo-app"           ]         },         "datasource":
+    null,         "definition": "label_values({namespace=\"$namespace\"}, workload)
+    ",         "description": "Choose workload for saturation panel",         "error":
+    null,         "hide": 0,         "includeAll": true,         "label": "Workload",         "multi":
+    true,         "name": "workload",         "options": [           {             "selected":
+    false,             "text": "All",             "value": "$__all"           },           {             "selected":
+    false,             "text": "k-podtato-head-dev-entry",             "value": "k-podtato-head-dev-entry"           },           {             "selected":
+    false,             "text": "k-podtato-head-dev-hat",             "value": "k-podtato-head-dev-hat"           },           {             "selected":
+    false,             "text": "k-podtato-head-dev-left-arm",             "value":
+    "k-podtato-head-dev-left-arm"           },           {             "selected":
+    false,             "text": "k-podtato-head-dev-left-leg",             "value":
+    "k-podtato-head-dev-left-leg"           },           {             "selected":
+    false,             "text": "k-podtato-head-dev-right-arm",             "value":
+    "k-podtato-head-dev-right-arm"           },           {             "selected":
+    false,             "text": "k-podtato-head-dev-right-leg",             "value":
+    "k-podtato-head-dev-right-leg"           },           {             "selected":
+    false,             "text": "monitor-demo",             "value": "monitor-demo"           },           {             "selected":
+    false,             "text": "my-kubernetes-component",             "value": "my-kubernetes-component"           },           {             "selected":
+    false,             "text": "podtato-head-dev-entry",             "value": "podtato-head-dev-entry"           },           {             "selected":
+    false,             "text": "podtato-head-dev-hat",             "value": "podtato-head-dev-hat"           },           {             "selected":
+    false,             "text": "podtato-head-dev-left-arm",             "value": "podtato-head-dev-left-arm"           },           {             "selected":
+    false,             "text": "podtato-head-dev-left-leg",             "value": "podtato-head-dev-left-leg"           },           {             "selected":
+    false,             "text": "podtato-head-dev-right-arm",             "value":
+    "podtato-head-dev-right-arm"           },           {             "selected":
+    false,             "text": "podtato-head-dev-right-leg",             "value":
+    "podtato-head-dev-right-leg"           },           {             "selected":
+    false,             "text": "podtato-head-entry",             "value": "podtato-head-entry"           },           {             "selected":
+    false,             "text": "podtato-head-hat",             "value": "podtato-head-hat"           },           {             "selected":
+    false,             "text": "podtato-head-left-arm",             "value": "podtato-head-left-arm"           },           {             "selected":
+    false,             "text": "podtato-head-left-leg",             "value": "podtato-head-left-leg"           },           {             "selected":
+    false,             "text": "podtato-head-right-arm",             "value": "podtato-head-right-arm"           },           {             "selected":
+    false,             "text": "podtato-head-right-leg",             "value": "podtato-head-right-leg"           },           {             "selected":
+    false,             "text": "spring-petclinic",             "value": "spring-petclinic"           },           {             "selected":
+    true,             "text": "sx-monitor-demo-app",             "value": "sx-monitor-demo-app"           },           {             "selected":
+    false,             "text": "why-kubernetes",             "value": "why-kubernetes"           }         ],         "query":
+    {           "query": "label_values({namespace=\"$namespace\"}, workload) ",           "refId":
+    "StandardVariableQuery"         },         "refresh": 0,         "regex": "",         "skipUrlSync":
+    false,         "sort": 0,         "tagValuesQuery": "",         "tags": [],         "tagsQuery":
+    "",         "type": "query",         "useTags": false       },       {         "allValue":
+    null,         "current": {           "selected": false,           "text": [             "sx-monitor-demo-app-service"           ],           "value":
+    [             "sx-monitor-demo-app-service"           ]         },         "datasource":
+    null,         "definition": "label_values({exported_namespace=\"$namespace\"},
+    exported_service) ",         "description": "Choose the service for Traffic, Latency
+    and Error panels",         "error": null,         "hide": 0,         "includeAll":
+    true,         "label": "Service",         "multi": true,         "name": "service",         "options":
+    [           {             "selected": false,             "text": "All",             "value":
+    "$__all"           },           {             "selected": false,             "text":
+    "k-podtato-head-dev-entry",             "value": "k-podtato-head-dev-entry"           },           {             "selected":
+    false,             "text": "monitor-demo",             "value": "monitor-demo"           },           {             "selected":
+    false,             "text": "nginx",             "value": "nginx"           },           {             "selected":
+    false,             "text": "podtato-head-dev-entry",             "value": "podtato-head-dev-entry"           },           {             "selected":
+    false,             "text": "podtato-head-entry",             "value": "podtato-head-entry"           },           {             "selected":
+    false,             "text": "spring-petclinic",             "value": "spring-petclinic"           },           {             "selected":
+    true,             "text": "sx-monitor-demo-app-service",             "value":
+    "sx-monitor-demo-app-service"           },           {             "selected":
+    false,             "text": "why-kubernetes",             "value": "why-kubernetes"           }         ],         "query":
+    {           "query": "label_values({exported_namespace=\"$namespace\"}, exported_service)
+    ",           "refId": "StandardVariableQuery"         },         "refresh": 0,         "regex":
+    "",         "skipUrlSync": false,         "sort": 0,         "tagValuesQuery":
+    "",         "tags": [],         "tagsQuery": "",         "type": "query",         "useTags":
+    false       }     ]   },   "time": {     "from": "now-15m",     "to": "now"   },   "timepicker":
+    {},   "timezone": "",   "title": "4 Golden Signals sX CNP",   "uid": "KRlE7mE4z",   "version":
+    2 }'
