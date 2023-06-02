@@ -4,7 +4,7 @@ metadata:
   labels:
     app: grafana
   name: 4goldensignals
-  namespace: sx-grafana
+  namespace: suxess-it-grafana
 spec:
   json: '{   "annotations": {     "list": [       {         "builtIn": 1,         "datasource":
     "-- Grafana --",         "enable": true,         "hide": true,         "iconColor":
